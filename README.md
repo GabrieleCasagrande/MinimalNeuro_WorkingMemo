@@ -54,7 +54,7 @@ Ensure you have a Python environment (3.8+) with the following dependencies:
 pip install numpy matplotlib scipy brian2
 ```
 
---
+---
 
 ## 📈 Usage Information
 
