@@ -1,4 +1,4 @@
-# eQIF Network Dynamics, Hysteresis, and Bifurcation Analysis
+# eQIF Dynamics, Hysteresis, Bifurcation Analysis and Network Implementation
 
 This repository provides a computational framework for simulating and analyzing **self-excitatory Quadratic Integrate-and-Fire (eQIF)** neurons. It includes tools for large-scale Spiking Neural Network (SNN) simulations, mean-field theoretical comparisons, and the exploration of neural robustness through phase-plane and bifurcation analysis.
 Additionally, the repository also porvide the script to simulate self-excitatory Leaky Integrate-and-Fire (eLIF), which is also shown in the manuscript.
