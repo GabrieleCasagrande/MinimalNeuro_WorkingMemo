@@ -124,7 +124,7 @@ def compute_instantaneous_freq(t, spike_times):
 
 
 
-def perturbation_current(t, Amp, tw, baseAmp=68, sigma_noise=0., random_seed=42):
+def perturbation_current(t, Amp, tw, baseAmp=65, sigma_noise=0., random_seed=42):
     """
     Perturbation current for testing state transitions in the eQIF model.
 

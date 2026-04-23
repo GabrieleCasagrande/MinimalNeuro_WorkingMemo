@@ -5,7 +5,7 @@ Additionally, the repository also porvide the script to simulate self-excitatory
 
 ## 🚀 Overview
 
-This repository provides a computational framework for simulating and analyzing an extension of the adaptive-QIF in the self-excitatory model case (that we term eQIF), presented in **"A minimal spiking neuron model of working memory"**. 
+This repository provides a computational framework for simulating and analyzing an extension of the adaptive-QIF in the self-excitatory model case (that we term eQIF), presented in **"A minimal model of working memory in neural systems and neuromorphic circuits"**. 
 It includes tools for large-scale Spiking Neural Network (SNN) simulations, mean-field theoretical comparisons, and the exploration of single-neuron bistability and hysteresis.
 It allows for the exploration of:
 1. **Dynamical Systems Theory**: Visualizing the mathematical foundations of the model through phase-plane trajectories and bifurcation diagrams.
