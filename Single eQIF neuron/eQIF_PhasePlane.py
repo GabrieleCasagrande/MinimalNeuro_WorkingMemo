@@ -13,7 +13,7 @@ plt.rcParams.update({
 })
 
 # ----- Parameters -----
-parameters = {'C':200, 'gL':10, 'EL':-65, 'V_T':-55, 'V_reset':-58, 'tau_w':20, 'a':12, 'b':50, 'I_ext':100}
+parameters = {'C':200, 'gL':10, 'EL':-65, 'V_T':-55, 'V_reset':-58, 'tau_w':20, 'a':4, 'b':70, 'I_ext':100}
 
 ##############################################
 # Compute the phase diagram and the nullclines
@@ -63,9 +63,6 @@ plt.figure(figsize=(8, 6))
 # Streamplot for vector field
 aspect_ratio = (V[-1] - V[0]) / (w[-1] - w[0])  # ratio of V-range to w-range
 dw_scaled = dw * aspect_ratio
-
-plt.streamplot(V * 1e3, w * 1e12, dV, dw_scaled,
-               color='grey', linewidth=.20, density= 10., arrowsize=.1)
 
 Vg = np.linspace(-80, -15, 40)
 wg = np.linspace(-100, 500, 40)
@@ -150,7 +147,6 @@ plt.plot(M_var.Vm[0][3000::]/mV, M_var.we[0][3000::]/pA, c='green', lw=2)
 plt.title(f'a = {a}, b = {b}')
 
 # Optional: save the figure
-#filename='PhasePlane_a='+str(a)+'_b='+str(b)+'.png'
-#plt.savefig(filename, dpi=120, format='png')
+plt.savefig('Figure_3c.svg', dpi=300, format='svg')
 
 plt.show()
