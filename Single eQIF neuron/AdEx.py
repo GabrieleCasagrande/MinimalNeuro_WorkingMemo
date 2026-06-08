@@ -18,19 +18,20 @@ start_scope()
 defaultclock.dt = dtime
 
 # Parameters
-C = 200 * pF           # Capacitance
-g_L = 10 * nS/mV       # Leak conductance
-E_L = -62 * mV         # Resting potential
+C = 180 * pF           # Capacitance
+g_L = 10 * nS      # Leak conductance
+E_L = -65 * mV         # Resting potential
 V_T = -55 * mV         # Threshold sodium activation
+D_T = 2 * mV            # Slope factor
 tau_w = 20 * ms        # Adaptation time constant
-a = 10 * nS             # Subthreshold adaptation
-b = 100 * pA            # Spike-triggered adaptation
-V_reset = -70 * mV     # Reset potential
+a = 2.5 * nS             # Subthreshold adaptation
+b = 60 * pA            # Spike-triggered adaptation
+V_reset = -58 * mV     # Reset potential
 
 # Define the time-varying external current
 AmpStep = 50
-BaseI = 70
-Pert = 20
+BaseI = 50
+Pert = 15
 time_steps = int(duration / dtime)  # Number of time steps
 current_array = np.full(time_steps, BaseI)  # Default 90 pA
 current_array[int(50*ms/dtime):int(200*ms/dtime)] = BaseI+AmpStep  # 100-600 ms: 130 pA
@@ -43,13 +44,13 @@ I_t = TimedArray(current_array * pA, dt=dtime)  # Ensure units of pA
 
 # Model equations
 eqs = '''
-dV/dt = (g_L * (E_L - V) * (V_T - V) + w + I_ext) / C : volt
+dV/dt = (g_L * (E_L - V) + g_L * D_T * exp((V - V_T)/D_T) + w + I_ext) / C : volt
 dw/dt = (a * (V - E_L) - w) / tau_w : amp
 I_ext = I_t(t) : amp
 ''' 
 
 # Define neuron group
-G = NeuronGroup(1, eqs, threshold='V > -20*mV', reset='V = V_reset; w += b', method='rk4')
+G = NeuronGroup(1, eqs, threshold='V > 0*mV', reset='V = V_reset; w += b', method='euler')
 G.V = E_L  # Initial membrane potential
 G.w = 0 * pA  # Initial adaptation current
 
@@ -74,7 +75,9 @@ plt.xticks([])
 
 # Plot membrane potential
 Vvar = M_var.V[0]/mV
-Vm=[-20 if Vvar[i] > -20 else Vvar[i] for i in range(len(Vvar))]
+# Set values above -40 mV to 0 for better visualization of spikes
+Vm=[0 if Vvar[i] > -40 else Vvar[i] for i in range(len(Vvar))]
+
 plt.subplot(312)
 ax = plt.gca()
 ax.spines['top'].set_visible(False)
@@ -100,7 +103,7 @@ plt.subplot(313)
 ax = plt.gca()
 ax2 = plt.twinx()
 
-# # Plot self-excitatory current 
+# Plot self-excitatory current 
 ax.plot(M_var.t/ms, M_var.w[0]/pA)
 ax.set_ylabel('$I_w$ (pA)')
 ax.set_xlabel('Time (ms)')
@@ -116,4 +119,6 @@ ax.xaxis.set_ticks_position('bottom')
 plt.plot(M_var.t/ms, instantaneous_freq / Hz, color='k')
 plt.ylabel('$f$ (Hz)')
 
+plt.tight_layout()
+plt.savefig('Figure_13.svg', dpi=300, format='svg')
 plt.show()

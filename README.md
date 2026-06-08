@@ -43,6 +43,8 @@ It allows for the exploration of:
 * `eQIF_utils.py`: Utility functions for simulation and analysis of the single-neuron eQIF model.
 * `eQIF.py`: Simulation of the eQIF model with a time-variable external current. 
 * `eLIF.py`: Simulation of the eLIF model with a time-variable external current.
+* `Izhikevich.py`: Simulation of the Izhikevic model with a time-variable external current.
+* `AdEx.py`: Simulation of the AdEx model with a time-variable external current.
 
 ---
 
@@ -83,3 +85,4 @@ Run `network_analysis.ipynb` to simulate the activity of a network of eQIF neuro
 
 ### Extra
 Run `eLIF.py` to simulate and plot th time evolution of the eLIF model with a time varying external current. By running this script is possible to show the appearence of a bistable regime in the self-excitatory Leaky Integrate-and-Fire.
+The same can be done with `Izhikevich.py` and `AdEx.py` for the respective models.
